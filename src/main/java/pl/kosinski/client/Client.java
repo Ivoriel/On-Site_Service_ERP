@@ -15,9 +15,12 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     @OneToMany(mappedBy = "client")
     private List<Unit> unitList = new ArrayList<>();
 
+    public void setName(String name){
+        this.name = name;
+    }
 }
