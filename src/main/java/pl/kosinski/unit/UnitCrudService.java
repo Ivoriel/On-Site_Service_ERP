@@ -1,18 +1,21 @@
 package pl.kosinski.unit;
 
 import org.springframework.stereotype.Service;
+import pl.kosinski.unit.UnitInfoDto;
 
 import java.util.List;
 
 @Service
-public interface ClientCrudService {
+public interface UnitCrudService {
 
-    public void saveClient(ClientInfoDto clientInfoDto);
+    public void saveUnit(UnitInfoDto unitInfoDto);
 
-    public ClientInfoDto findClientById (long id);
+    public UnitInfoDto findUnitbyId(long id);
 
-    public void deleteClient(long id);
+    public void deleteUnit(long id);
 
-    public List<ClientInfoDto> findAllClients();
+    public List<UnitInfoDto> findAllUnits();
+
+    public List<UnitInfoDto> getUnitsByClientId(long id);
 
 }

@@ -1,6 +1,6 @@
 package pl.kosinski.unit;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,51 +9,51 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/clients")
-@RequiredArgsConstructor
-public class ClientCrudController {
+@RequestMapping("/units")
+@AllArgsConstructor
+public class UnitCrudController {
 
-    private ClientCrudService clientCrudService;
+    private UnitCrudService unitCrudService;
 
     @GetMapping("")
-    public String clientHome(Model model) {
-        model.addAttribute("clients", clientCrudService.findAllClients());
-        return "/clients/home";
+    public String unitHome(Model model) {
+        model.addAttribute("units", unitCrudService.findAllUnits());
+        return "/units/unitsHome";
     }
 
     @GetMapping("/create")
-    public String createClient(Model model) {
-        model.addAttribute("client", new ClientInfoDto());
-        return "/clients/create";
+    public String createUnit(Model model) {
+        model.addAttribute("unit", new UnitInfoDto());
+        return "/units/create";
     }
 
     @PostMapping("/create")
-    public String createClient(@Valid ClientInfoDto clientInfoDto, BindingResult result) {
+    public String createUnit(@Valid UnitInfoDto unitInfoDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "/clients/create";
+            return "/units/create";
         }
-        clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients";
+        unitCrudService.saveUnit(unitInfoDto);
+        return "redirect:/units";
     }
 
     @GetMapping("/update/{id}")
-    public String updateClient(Model model, @PathVariable long id) {
-        model.addAttribute("client", clientCrudService.findClientById(id));
-        return "/clients/update";
+    public String updateUnit(Model model, @PathVariable long id) {
+        model.addAttribute("client", unitCrudService.findUnitbyId(id));
+        return "/units/update";
     }
 
     @PutMapping("/update/{id}")
-    public String updateClient(@Valid ClientInfoDto clientInfoDto, BindingResult result, @PathVariable long id) {
+    public String updateClient(@Valid UnitInfoDto unitInfoDto, BindingResult result, @PathVariable long id) {
         if (result.hasErrors()) {
-            return "/clients/update/" + id;
+            return "/units/update/" + id;
         }
-        clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients";
+        unitCrudService.saveUnit(unitInfoDto);
+        return "redirect:/units";
     }
 
     @DeleteMapping("")
     public String deleteClient(Model model) {
-        clientCrudService.deleteClient(Long.parseLong((String)model.getAttribute("client")));
+        unitCrudService.deleteUnit(Long.parseLong((String)model.getAttribute("unit")));
         return "redirect:/clients";
     }
 

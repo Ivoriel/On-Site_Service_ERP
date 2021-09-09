@@ -2,9 +2,11 @@ package pl.kosinski.unit;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.kosinski.client.Client;
+
+import java.util.List;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Long> {
+public interface UnitRepository extends JpaRepository<Unit, Long> {
 
+    List<Unit> getUnitsByClientId(long id);
 }

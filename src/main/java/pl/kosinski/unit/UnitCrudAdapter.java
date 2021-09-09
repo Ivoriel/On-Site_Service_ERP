@@ -2,57 +2,71 @@ package pl.kosinski.unit;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.kosinski.client.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ClientCrudAdapter implements ClientCrudService {
+public class UnitCrudAdapter implements UnitCrudService {
 
-    private ClientRepository clientRepository;
-
-    @Override
-    public void saveClient(ClientInfoDto clientInfoDto) {
-//        if (clientInfoDto.getId() != null) {
-//            Client client = getClientbyId(clientInfoDto.getId());
-//            client.setName(clientInfoDto.getName());
-//            clientRepository.save(client);
-//        } else {
-//        }
-        Client client = new Client();
-        client.setName(clientInfoDto.getName());
-        clientRepository.save(client);
-    }
-
-    private Client getClientbyId(long id) {
-        return clientRepository.findById(id).get();
-    }
+    private UnitRepository repository;
 
     @Override
-    public ClientInfoDto findClientById(long id) {
-        Client client = getClientbyId(id);
-        ClientInfoDto clientInfoDto = new ClientInfoDto();
-        clientInfoDto.setId(client.getId());
-        clientInfoDto.setName(client.getName());
-        return clientInfoDto;
-    }
-
-    @Override
-    public void deleteClient(long id) {
-        clientRepository.deleteById(id);
-    }
-
-    @Override
-    public List<ClientInfoDto> findAllClients() {
-        List<ClientInfoDto> clientList = new ArrayList<>();
-        for (Client c : clientRepository.findAll()) {
-            ClientInfoDto clientInfoDto = new ClientInfoDto();
-            clientInfoDto.setId(c.getId());
-            clientInfoDto.setName(c.getName());
-            clientList.add(clientInfoDto);
+    public void saveUnit(UnitInfoDto unitInfoDto) {
+        Unit unit = new Unit();
+        if (unitInfoDto.getId() != null) {
+            unit = getUnitbyId(unitInfoDto.getId());
+            unit.setUnitInfo(unit.getSerialNumber(), unit.getClient());
+            repository.save(unit);
+        } else {
+            unit.setUnitInfo(unitInfoDto.getSerialNumber(), unitInfoDto.getClient());
+            repository.save(unit);
         }
-        return clientList;
+    }
+
+    private Unit getUnitbyId(long id) {
+        return repository.findById(id).get();
+    }
+
+    @Override
+    public UnitInfoDto findUnitbyId(long id) {
+        Unit unit = getUnitbyId(id);
+        UnitInfoDto unitInfoDto = new UnitInfoDto();
+        unitInfoDto.setId(unit.getId());
+        unitInfoDto.setSerialNumber(unit.getSerialNumber());
+        unitInfoDto.setClient(unit.getClient());
+        return unitInfoDto;
+    }
+
+    @Override
+    public void deleteUnit(long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public List<UnitInfoDto> findAllUnits() {
+        List<UnitInfoDto> UnitList = new ArrayList<>();
+        for (Unit u : repository.findAll()) {
+            UnitInfoDto unitInfoDto = new UnitInfoDto();
+            unitInfoDto.setId(u.getId());
+            unitInfoDto.setSerialNumber(u.getSerialNumber());
+            unitInfoDto.setClient(u.getClient());
+            UnitList.add(unitInfoDto);
+        }
+        return UnitList;
+    }
+
+    public List<UnitInfoDto> getUnitsByClientId(long id) {
+        List<Unit> unitList = repository.getUnitsByClientId(id);
+        List<UnitInfoDto> unitInfoDtoList= new ArrayList<>();
+        for (Unit unit : unitList) {
+            UnitInfoDto unitInfoDto = new UnitInfoDto();
+            unitInfoDto.setId(unit.getId());
+            unitInfoDto.setSerialNumber(unit.getSerialNumber());
+            unitInfoDto.setClient(unit.getClient());
+            unitInfoDtoList.add(unitInfoDto);
+        }
+        return unitInfoDtoList;
     }
 }

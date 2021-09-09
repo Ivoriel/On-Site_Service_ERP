@@ -18,4 +18,9 @@ public class Unit {
     @ManyToOne
     private Client client;
 
+    public void setUnitInfo(String serialNumber, Client client) {
+        this.serialNumber = serialNumber;
+        this.client = client;
+    }
+
 }
