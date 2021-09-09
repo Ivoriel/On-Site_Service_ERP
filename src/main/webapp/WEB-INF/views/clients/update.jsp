@@ -7,13 +7,13 @@
             color: red;
         }
     </style>
-    <title>Book creation</title>
+    <title>Client update</title>
 </head>
 <body>
     <table>
         <form:form method="post" modelAttribute="client">
             <tr>
-                <td><form:label path="name">Title:</form:label></td>
+                <td><form:label path="name">Name:</form:label></td>
                 <td><form:input path="name" /></td>
                 <td><form:errors path="name" /></td>
             </tr>
