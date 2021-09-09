@@ -7,15 +7,20 @@
             color: red;
         }
     </style>
-    <title>Client creation</title>
+    <title>Unit creation</title>
 </head>
 <body>
     <table>
-        <form:form method="post" modelAttribute="client">
+        <form:form method="post" modelAttribute="unit">
             <tr>
-                <td><form:label path="name">Name:</form:label></td>
-                <td><form:input path="name" /></td>
-                <td><form:errors path="name" /></td>
+                <td><form:label path="serialNumber">Serial number:</form:label></td>
+                <td><form:input path="serialNumber" /></td>
+                <td><form:errors path="serialNumber" /></td>
+            </tr>
+            <tr>
+                <td><form:label path="client">Client id:</form:label></td>
+                <td><form:input path="client" /></td>
+                <td><form:errors path="client" /></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Save"></td>

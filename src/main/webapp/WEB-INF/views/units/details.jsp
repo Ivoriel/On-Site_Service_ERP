@@ -8,25 +8,25 @@
             color: red;
         }
     </style>
-    <title>Client details</title>
+    <title>Unit details</title>
 </head>
 <body>
 <table>
         <tr>
             <td>Name: </td>
-            <td>${client.name}</td>
+            <td>${unit.name}</td>
         </tr>
         <tr>
-            <td><form action="/clients" method="get"> <input type="submit" value="Back to list"></form></td>
-            <td><form action="/clients/update/${client.id}" method="get"> <input type="submit" value="Update client"></form></td>
-            <td><form action="/clients/delete/${client.id}" method="get"> <input type="submit" value="Delete client"></form></td>
+            <td><form action="/units" method="get"> <input type="submit" value="Back to list"></form></td>
+            <td><form action="/units/update/${unit.id}" method="get"> <input type="submit" value="Update unit"></form></td>
+            <td><form action="/units/delete/${unit.id}" method="get"> <input type="submit" value="Delete unit"></form></td>
         </tr>
-        <c:forEach items="${clientUnits}" var="unit">
-            <tr>
-                <td>${unit.id}</td>
-                <td>${unit.serialNumber}</td>
-            </tr>
-        </c:forEach>
+<%--        <c:forEach items="${clientUnits}" var="unit">--%>
+<%--            <tr>--%>
+<%--                <td>${unit.id}</td>--%>
+<%--                <td>${unit.serialNumber}</td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
 </table>
 </body>
 </html>
