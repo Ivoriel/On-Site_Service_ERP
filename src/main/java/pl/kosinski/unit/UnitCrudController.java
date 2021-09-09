@@ -1,26 +1,24 @@
-package pl.kosinski.client;
+package pl.kosinski.unit;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.kosinski.unit.UnitCrudService;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/clients")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClientCrudController {
 
     private ClientCrudService clientCrudService;
-    private UnitCrudService unitCrudService;
 
     @GetMapping("")
     public String clientHome(Model model) {
         model.addAttribute("clients", clientCrudService.findAllClients());
-        return "/clients/clientsHome";
+        return "/clients/home";
     }
 
     @GetMapping("/create")
@@ -34,15 +32,8 @@ public class ClientCrudController {
         if (result.hasErrors()) {
             return "/clients/create";
         }
-        clientInfoDto = clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients/details/" + clientInfoDto.getId();
-    }
-
-    @GetMapping("/details/{id}")
-    public String getClient(Model model, @PathVariable long id) {
-        model.addAttribute("client", clientCrudService.findClientById(id));
-        model.addAttribute("clientUnits", unitCrudService.getUnitsByClientId(id));
-        return "/clients/details";
+        clientCrudService.saveClient(clientInfoDto);
+        return "redirect:/clients";
     }
 
     @GetMapping("/update/{id}")
@@ -51,24 +42,18 @@ public class ClientCrudController {
         return "/clients/update";
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public String updateClient(@Valid ClientInfoDto clientInfoDto, BindingResult result, @PathVariable long id) {
         if (result.hasErrors()) {
             return "/clients/update/" + id;
         }
-        clientInfoDto = clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients/details/" + clientInfoDto.getId();
+        clientCrudService.saveClient(clientInfoDto);
+        return "redirect:/clients";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteClient(Model model, @PathVariable long id) {
-        model.addAttribute("clientId", id);
-        return "/clients/delete";
-    }
-
-    @PostMapping("/delete/{id}")
-    public String deleteClient(@PathVariable long id) {
-        clientCrudService.deleteClient(id);
+    @DeleteMapping("")
+    public String deleteClient(Model model) {
+        clientCrudService.deleteClient(Long.parseLong((String)model.getAttribute("client")));
         return "redirect:/clients";
     }
 

@@ -1,34 +1,33 @@
-package pl.kosinski.client;
+package pl.kosinski.unit;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.kosinski.client.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ClientCrudAdapter implements ClientCrudService{
+public class ClientCrudAdapter implements ClientCrudService {
 
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
 
     @Override
-    public ClientInfoDto saveClient(ClientInfoDto clientInfoDto) {
+    public void saveClient(ClientInfoDto clientInfoDto) {
+//        if (clientInfoDto.getId() != null) {
+//            Client client = getClientbyId(clientInfoDto.getId());
+//            client.setName(clientInfoDto.getName());
+//            clientRepository.save(client);
+//        } else {
+//        }
         Client client = new Client();
-        if (clientInfoDto.getId() != null) {
-            client = getClientbyId(clientInfoDto.getId());
-            client.setName(clientInfoDto.getName());
-            client = repository.save(client);
-        } else {
-            client.setName(clientInfoDto.getName());
-            client =  repository.save(client);
-        }
-        clientInfoDto.setId(client.getId());
-        return clientInfoDto;
+        client.setName(clientInfoDto.getName());
+        clientRepository.save(client);
     }
 
     private Client getClientbyId(long id) {
-        return repository.findById(id).get();
+        return clientRepository.findById(id).get();
     }
 
     @Override
@@ -42,13 +41,13 @@ public class ClientCrudAdapter implements ClientCrudService{
 
     @Override
     public void deleteClient(long id) {
-        repository.deleteById(id);
+        clientRepository.deleteById(id);
     }
 
     @Override
     public List<ClientInfoDto> findAllClients() {
         List<ClientInfoDto> clientList = new ArrayList<>();
-        for (Client c : repository.findAll()) {
+        for (Client c : clientRepository.findAll()) {
             ClientInfoDto clientInfoDto = new ClientInfoDto();
             clientInfoDto.setId(c.getId());
             clientInfoDto.setName(c.getName());

@@ -1,4 +1,4 @@
-package pl.kosinski.client;
+package pl.kosinski.unit;
 
 import org.springframework.stereotype.Service;
 
@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public interface ClientCrudService {
 
-    public ClientInfoDto saveClient(ClientInfoDto clientInfoDto);
+    public void saveClient(ClientInfoDto clientInfoDto);
 
     public ClientInfoDto findClientById (long id);
 
