@@ -21,7 +21,7 @@ public class ClientCrudAdapter implements ClientCrudService{
             client = repository.save(client);
         } else {
             client.setName(clientInfoDto.getName());
-            client =  repository.save(client);
+            client = repository.save(client);
         }
         clientInfoDto.setId(client.getId());
         return clientInfoDto;
