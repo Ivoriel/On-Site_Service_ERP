@@ -1,7 +1,6 @@
 package pl.kosinski.serviceRequest;
 
 import org.springframework.stereotype.Service;
-import pl.kosinski.unit.UnitInfoDto;
 
 import java.util.List;
 

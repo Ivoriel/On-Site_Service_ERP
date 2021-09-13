@@ -31,5 +31,10 @@ public class ServiceRequest {
     @OneToMany(mappedBy = "serviceRequest")
     private List<ServiceTask> serviceTasks = new ArrayList<>();
 
+    public void setRequestInfo(Enum<ServiceRequestType> type, Enum<ServiceRequestStatus> status, String brief) {
+        this.type = type;
+        this.status = status;
+        this.brief = brief;
+    }
 
 }

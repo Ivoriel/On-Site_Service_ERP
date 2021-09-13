@@ -17,7 +17,7 @@ public class UnitCrudAdapter implements UnitCrudService {
         Unit unit = new Unit();
         if (unitInfoDto.getId() != null) {
             unit = getUnitbyId(unitInfoDto.getId());
-            unit.setUnitInfo(unit.getSerialNumber(), unit.getClient());
+            unit.setUnitInfo(unitInfoDto.getSerialNumber(), unitInfoDto.getClient());
             repository.save(unit);
         } else {
             unit.setUnitInfo(unitInfoDto.getSerialNumber(), unitInfoDto.getClient());
