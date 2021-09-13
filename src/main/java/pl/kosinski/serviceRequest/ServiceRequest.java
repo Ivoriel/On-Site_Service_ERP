@@ -1,5 +1,7 @@
 package pl.kosinski.serviceRequest;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.kosinski.common.ServiceRequestStatus;
 import pl.kosinski.common.ServiceRequestType;
 import pl.kosinski.serviceTask.ServiceTask;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class ServiceRequest {
 
     @Id

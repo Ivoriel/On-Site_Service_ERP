@@ -1,11 +1,15 @@
 package pl.kosinski.serviceTask;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.kosinski.serviceRequest.ServiceRequest;
 import pl.kosinski.unit.Unit;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class ServiceTask {
 
     @Id
