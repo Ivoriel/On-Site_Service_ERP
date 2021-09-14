@@ -17,5 +17,5 @@ public class ServiceRequestInfoDto {
     private String brief;
     private String debrief;
     private List<Unit> units;
-    private List<ServiceTask> tasks;
+    private List<ServiceTask> serviceTasks;
 }

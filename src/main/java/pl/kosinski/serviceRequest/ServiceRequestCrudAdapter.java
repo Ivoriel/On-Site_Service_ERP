@@ -18,9 +18,11 @@ public class ServiceRequestCrudAdapter implements ServiceRequestCrudService {
         if (requestInfoDto.getId() != null) {
             request = getById(requestInfoDto.getId());
             request.setRequestInfo(requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.updateTasksAndUnits(requestInfoDto.getServiceTasks(), requestInfoDto.getUnits());
             repository.save(request);
         } else {
             request.setRequestInfo(requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.updateTasksAndUnits(requestInfoDto.getServiceTasks(), requestInfoDto.getUnits());
             repository.save(request);
         }
     }
@@ -77,7 +79,7 @@ public class ServiceRequestCrudAdapter implements ServiceRequestCrudService {
         requestDto.setBrief(request.getBrief());
         requestDto.setDebrief(request.getDebrief());
         requestDto.setUnits(request.getUnits());
-        requestDto.setTasks(request.getServiceTasks());
+        requestDto.setServiceTasks(request.getServiceTasks());
         return requestDto;
     }
 }

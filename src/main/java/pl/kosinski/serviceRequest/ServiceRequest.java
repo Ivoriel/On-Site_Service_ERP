@@ -37,4 +37,8 @@ public class ServiceRequest {
         this.brief = brief;
     }
 
+    public void updateTasksAndUnits(List<ServiceTask> tasks, List<Unit> units) {
+        this.serviceTasks = tasks;
+        this.units = units;
+    }
 }
