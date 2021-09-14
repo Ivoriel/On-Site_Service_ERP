@@ -3,14 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Units list</title>
+    <title>Requests list</title>
 </head>
 <body>
     <table>
         <tr>
             <td>
-                <form action="/units/create">
-                    <input type="submit" value="Add unit">
+                <form action="/requests/create">
+                    <input type="submit" value="Add request">
                 </form>
             </td>
             <td>
@@ -19,8 +19,8 @@
                 </form>
             </td>
             <td>
-                <form action="/requests">
-                    <input type="submit" value="Requests list">
+                <form action="/units">
+                    <input type="submit" value="Units list">
                 </form>
             </td>
         </tr>
@@ -28,27 +28,35 @@
     <table>
         <tr>
             <th>Id</th>
-            <th>Serial number</th>
-            <th>Client id</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Client</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Brief</th>
+            <th>Debrief</th>
+            <th>Units</th>
+            <th>Tasks</th>
         </tr>
-        <c:forEach items="${units}" var="unit">
+        <c:forEach items="${requests}" var="request">
             <tr>
-                <td>${unit.id}</td>
-                <td>${unit.serialNumber}</td>
-                <td>${unit.client}</td>
-                <form action="/units/details/${unit.id}" method="get">
+                <td>${request.id}</td>
+                <td>${request.client.name}</td>
+                <td>${request.type}</td>
+                <td>${request.status}</td>
+                <td>${request.brief}</td>
+                <td>${request.debrief}</td>
+                <td>${request.units.size()}</td>
+                <td>${request.serviceTasks.size()}</td>
+                <form action="/requests/details/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/units/update/${unit.id}" method="get">
+                <form action="/requests/update/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/units/delete/${unit.id}" method="get">
+                <form action="/requests/delete/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>

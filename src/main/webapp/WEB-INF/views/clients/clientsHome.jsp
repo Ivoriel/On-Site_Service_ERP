@@ -18,11 +18,11 @@
                     <input type="submit" value="Units list">
                 </form>
             </td>
-<%--            <td>--%>
-<%--                <form action="/publishers/all">--%>
-<%--                    <input type="submit" value="Publishers list">--%>
-<%--                </form>--%>
-<%--            </td>--%>
+            <td>
+                <form action="/requests">
+                    <input type="submit" value="Requests list">
+                </form>
+            </td>
         </tr>
     </table>
     <table>
