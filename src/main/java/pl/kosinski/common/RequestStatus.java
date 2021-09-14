@@ -1,12 +1,12 @@
 package pl.kosinski.common;
 
-public enum ServiceRequestStatus {
+public enum RequestStatus {
     OPEN(true),
     CLOSED(false);
 
     private boolean status;
 
-    ServiceRequestStatus(boolean status) {
+    RequestStatus(boolean status) {
         this.status = status;
     }
 

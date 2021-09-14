@@ -1,8 +1,8 @@
-package pl.kosinski.serviceTask;
+package pl.kosinski.task;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.kosinski.serviceRequest.ServiceRequest;
+import pl.kosinski.request.Request;
 import pl.kosinski.unit.Unit;
 
 import javax.persistence.*;
@@ -10,13 +10,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class ServiceTask {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private ServiceRequest serviceRequest;
+    private Request request;
     @OneToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;

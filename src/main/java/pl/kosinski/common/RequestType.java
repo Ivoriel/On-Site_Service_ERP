@@ -1,6 +1,6 @@
 package pl.kosinski.common;
 
-public enum ServiceRequestType {
+public enum RequestType {
     START_UP,
     SHUT_DOWN,
     MAINTENANCE,
