@@ -9,10 +9,6 @@ import java.util.List;
 @Repository
 public interface ServiceRequestRepository extends JpaRepository<ServiceRequest, Long> {
 
-    @Query(value = "SELECT * FROM service_request s " +
-            "JOIN service_requests_units ru ON s.id = ru.service_request_id " +
-            "JOIN unit u ON ru.unit_id = u.id" +
-            "WHERE u.client_id = :id", nativeQuery = true)
     List<ServiceRequest> getServiceReqByClientId(long id);
 
     @Query(value = "SELECT * FROM service_request s " +

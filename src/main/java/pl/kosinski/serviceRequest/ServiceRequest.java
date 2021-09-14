@@ -2,6 +2,7 @@ package pl.kosinski.serviceRequest;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.kosinski.client.Client;
 import pl.kosinski.common.ServiceRequestStatus;
 import pl.kosinski.common.ServiceRequestType;
 import pl.kosinski.serviceTask.ServiceTask;
@@ -19,6 +20,8 @@ public class ServiceRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    private Client client;
     private Enum<ServiceRequestType> type;
     private Enum<ServiceRequestStatus> status;
     private String brief;
@@ -31,7 +34,8 @@ public class ServiceRequest {
     @OneToMany(mappedBy = "serviceRequest")
     private List<ServiceTask> serviceTasks = new ArrayList<>();
 
-    public void setRequestInfo(Enum<ServiceRequestType> type, Enum<ServiceRequestStatus> status, String brief) {
+    public void setRequestInfo(Client client, Enum<ServiceRequestType> type, Enum<ServiceRequestStatus> status, String brief) {
+        this.client = client;
         this.type = type;
         this.status = status;
         this.brief = brief;

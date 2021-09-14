@@ -1,6 +1,7 @@
 package pl.kosinski.serviceRequest;
 
 import lombok.Data;
+import pl.kosinski.client.Client;
 import pl.kosinski.common.ServiceRequestStatus;
 import pl.kosinski.common.ServiceRequestType;
 import pl.kosinski.serviceTask.ServiceTask;
@@ -12,6 +13,7 @@ import java.util.List;
 public class ServiceRequestInfoDto {
 
     private Long id;
+    private Client client;
     private Enum<ServiceRequestType> type;
     private Enum<ServiceRequestStatus> status;
     private String brief;

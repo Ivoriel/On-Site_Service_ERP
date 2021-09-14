@@ -17,11 +17,11 @@ public class ServiceRequestCrudAdapter implements ServiceRequestCrudService {
         ServiceRequest request = new ServiceRequest();
         if (requestInfoDto.getId() != null) {
             request = getById(requestInfoDto.getId());
-            request.setRequestInfo(requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
             request.updateTasksAndUnits(requestInfoDto.getServiceTasks(), requestInfoDto.getUnits());
             repository.save(request);
         } else {
-            request.setRequestInfo(requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
             request.updateTasksAndUnits(requestInfoDto.getServiceTasks(), requestInfoDto.getUnits());
             repository.save(request);
         }
