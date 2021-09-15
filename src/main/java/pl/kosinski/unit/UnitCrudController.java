@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.kosinski.client.ClientCrudService;
+import pl.kosinski.client.ClientInfoDto;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/units")
@@ -14,6 +17,7 @@ import javax.validation.Valid;
 public class UnitCrudController {
 
     private UnitCrudService unitCrudService;
+    private ClientCrudService clientCrudService;
 
     @GetMapping("")
     public String unitHome(Model model) {
@@ -55,6 +59,11 @@ public class UnitCrudController {
     public String deleteClient(Model model) {
         unitCrudService.deleteUnit(Long.parseLong((String)model.getAttribute("unit")));
         return "redirect:/clients";
+    }
+
+    @ModelAttribute("clients")
+    public List<ClientInfoDto> clients() {
+        return clientCrudService.findAllClients();
     }
 
 }

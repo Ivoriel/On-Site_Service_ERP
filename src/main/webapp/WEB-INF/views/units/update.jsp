@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td><form:label path="client">Client id:</form:label></td>
-                <td><form:input path="client" /></td>
+                <td><form:select path="client" items="${clients}" itemValue="id" itemLabel="name"/></td>
                 <td><form:errors path="client" /></td>
             </tr>
             <tr>
