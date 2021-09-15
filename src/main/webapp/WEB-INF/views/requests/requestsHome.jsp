@@ -35,17 +35,20 @@
             <th>Debrief</th>
             <th>Units</th>
             <th>Tasks</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <c:forEach items="${requests}" var="request">
             <tr>
                 <td>${request.id}</td>
                 <td>${request.client.name}</td>
-                <td>${request.type}</td>
-                <td>${request.status}</td>
+                <td>${request.type.label}</td>
+                <td>${request.status.label}</td>
                 <td>${request.brief}</td>
                 <td>${request.debrief}</td>
                 <td>${request.units.size()}</td>
-                <td>${request.serviceTasks.size()}</td>
+                <td>${request.tasks.size()}</td>
                 <form action="/requests/details/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
