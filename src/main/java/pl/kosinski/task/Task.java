@@ -21,4 +21,10 @@ public class Task {
     @JoinColumn(name = "unit_id")
     private Unit unit;
     private String description;
+
+    public void setTaskInfo(Request request, Unit unit, String description) {
+        this.request = request;
+        this.unit = unit;
+        this.description = description;
+    }
 }
