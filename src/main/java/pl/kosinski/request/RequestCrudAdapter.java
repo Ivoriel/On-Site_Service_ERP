@@ -17,11 +17,11 @@ public class RequestCrudAdapter implements RequestCrudService {
         Request request = new Request();
         if (requestInfoDto.getId() != null) {
             request = getById(requestInfoDto.getId());
-            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief(), requestInfoDto.getDebrief());
             request.updateTasksAndUnits(requestInfoDto.getTasks(), requestInfoDto.getUnits());
             repository.save(request);
         } else {
-            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief());
+            request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief(), requestInfoDto.getDebrief());
             request.updateTasksAndUnits(requestInfoDto.getTasks(), requestInfoDto.getUnits());
             repository.save(request);
         }
@@ -76,6 +76,7 @@ public class RequestCrudAdapter implements RequestCrudService {
     private RequestInfoDto translateToDto(Request request) {
         RequestInfoDto requestDto = new RequestInfoDto();
         requestDto.setId(request.getId());
+        requestDto.setClient(request.getClient());
         requestDto.setType(request.getType());
         requestDto.setStatus(request.getStatus());
         requestDto.setBrief(request.getBrief());

@@ -22,8 +22,10 @@ public class Request {
     private Long id;
     @ManyToOne
     private Client client;
-    private Enum<RequestType> type;
-    private Enum<RequestStatus> status;
+    @Enumerated(EnumType.STRING)
+    private RequestType type;
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status;
     private String brief;
     private String debrief;
     @ManyToMany
@@ -34,11 +36,12 @@ public class Request {
     @OneToMany(mappedBy = "request")
     private List<Task> tasks = new ArrayList<>();
 
-    public void setRequestInfo(Client client, Enum<RequestType> type, Enum<RequestStatus> status, String brief) {
+    public void setRequestInfo(Client client, RequestType type, RequestStatus status, String brief, String debrief) {
         this.client = client;
         this.type = type;
         this.status = status;
         this.brief = brief;
+        this.debrief = debrief;
     }
 
     public void updateTasksAndUnits(List<Task> tasks, List<Unit> units) {

@@ -14,8 +14,8 @@ public class RequestInfoDto {
 
     private Long id;
     private Client client;
-    private Enum<RequestType> type;
-    private Enum<RequestStatus> status;
+    private RequestType type;
+    private RequestStatus status;
     private String brief;
     private String debrief;
     private List<Unit> units;
