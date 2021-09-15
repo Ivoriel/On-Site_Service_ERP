@@ -40,6 +40,12 @@ public class UnitCrudController {
         return "redirect:/units";
     }
 
+    @GetMapping("/details")
+    public String getUnit(@PathVariable long id, Model model) {
+        model.addAttribute("unit", unitCrudService.getUnitsByClientId(id));
+        return "/units/details";
+    }
+
     @GetMapping("/update/{id}")
     public String updateUnit(Model model, @PathVariable long id) {
         model.addAttribute("client", unitCrudService.findUnitbyId(id));
