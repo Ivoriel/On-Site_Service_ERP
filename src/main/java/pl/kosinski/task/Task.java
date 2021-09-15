@@ -2,6 +2,7 @@ package pl.kosinski.task;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.kosinski.common.TaskStatus;
 import pl.kosinski.request.Request;
 import pl.kosinski.unit.Unit;
 
@@ -20,6 +21,8 @@ public class Task {
     @OneToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
     private String description;
 
     public void setTaskInfo(Request request, Unit unit, String description) {
