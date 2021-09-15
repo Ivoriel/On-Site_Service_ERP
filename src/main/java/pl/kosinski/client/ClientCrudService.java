@@ -7,12 +7,12 @@ import java.util.List;
 @Service
 public interface ClientCrudService {
 
-    public ClientInfoDto saveClient(ClientInfoDto clientInfoDto);
+    ClientInfoDto saveClient(ClientInfoDto clientInfoDto);
 
-    public ClientInfoDto findClientById (long id);
+    ClientInfoDto findClientById (long id);
 
-    public void deleteClient(long id);
+    void deleteClient(long id);
 
-    public List<ClientInfoDto> findAllClients();
+    List<ClientInfoDto> findAllClients();
 
 }
