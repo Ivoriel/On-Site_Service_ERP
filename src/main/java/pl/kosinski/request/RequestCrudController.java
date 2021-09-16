@@ -35,9 +35,9 @@ public class RequestCrudController {
 
     @PostMapping("/create")
     public String createRequest(@Valid RequestInfoDto requestInfoDto, BindingResult result) {
-//        if(result.hasErrors()) {
-//            return "/requests/create";
-//        }
+        if(result.hasErrors()) {
+            return "/requests/create";
+        }
         requestInfoDto = requestCrudService.saveRequest(requestInfoDto);
         return "redirect:/requests/details/" + requestInfoDto.getId();
     }
