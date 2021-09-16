@@ -23,6 +23,11 @@
                     <input type="submit" value="Units list">
                 </form>
             </td>
+            <td>
+                <form action="/tasks">
+                    <input type="submit" value="Tasks list">
+                </form>
+            </td>
         </tr>
     </table>
     <table>
@@ -66,8 +71,6 @@
                 </form>
             </tr>
         </c:forEach>
-
-
     </table>
 </body>
 </html>

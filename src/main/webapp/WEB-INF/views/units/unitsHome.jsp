@@ -23,6 +23,11 @@
                     <input type="submit" value="Requests list">
                 </form>
             </td>
+            <td>
+                <form action="/tasks">
+                    <input type="submit" value="Tasks list">
+                </form>
+            </td>
         </tr>
     </table>
     <table>
