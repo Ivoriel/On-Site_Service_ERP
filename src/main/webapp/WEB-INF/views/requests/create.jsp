@@ -33,21 +33,6 @@
                 <td><form:errors path="brief" /></td>
             </tr>
             <tr>
-                <td><form:label path="debrief">Debrief:</form:label></td>
-                <td><form:textarea path="debrief" /></td>
-                <td><form:errors path="debrief" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="units">Units:</form:label></td>
-                <td><form:input path="units" /></td>
-                <td><form:errors path="units" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="tasks">Tasks:</form:label></td>
-                <td><form:input path="tasks" /></td>
-                <td><form:errors path="tasks" /></td>
-            </tr>
-            <tr>
                 <td><input type="submit" value="Save"></td>
             </tr>
         </form:form>
