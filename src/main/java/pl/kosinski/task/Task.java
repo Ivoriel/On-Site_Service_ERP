@@ -7,6 +7,7 @@ import pl.kosinski.request.Request;
 import pl.kosinski.unit.Unit;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -15,13 +16,16 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
     @ManyToOne
+    @NotNull
     private Request request;
     @OneToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TaskStatus status;
     private String description;
 

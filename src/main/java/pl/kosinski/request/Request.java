@@ -9,6 +9,7 @@ import pl.kosinski.task.Task;
 import pl.kosinski.unit.Unit;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,15 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
+    @NotNull
     @ManyToOne
     private Client client;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private RequestType type;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
     private String brief;
@@ -33,6 +38,7 @@ public class Request {
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "unit_id"))
     private List<Unit> units = new ArrayList<>();
+
     @OneToMany(mappedBy = "request")
     private List<Task> tasks = new ArrayList<>();
 

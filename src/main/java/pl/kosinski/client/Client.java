@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.kosinski.unit.Unit;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
+    @NotNull
     private String name;
     @OneToMany(mappedBy = "client")
     private List<Unit> unitList = new ArrayList<>();
