@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public enum TaskStatus {
 
-    PLANNED(true, "Planned"),
+    IN_PLANNING(true, "In planning"),
+    ASSIGNED(true, "Assigned"),
     IN_PROGRESS(true, "In progress"),
     COMPLETED(false, "Completed"),
     REJECTED(false, "Rejected");
