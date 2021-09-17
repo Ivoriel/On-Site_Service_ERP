@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.kosinski.common.TaskStatus;
+import pl.kosinski.request.RequestCrudService;
 import pl.kosinski.unit.UnitCrudService;
+import pl.kosinski.unit.UnitListDto;
 
 import javax.validation.Valid;
 
@@ -17,6 +19,7 @@ public class TaskCrudController {
 
     TaskCrudService taskCrudService;
     UnitCrudService unitCrudService;
+    RequestCrudService requestCrudService;
 
     @GetMapping("")
     public String tasksHome(Model model) {
@@ -62,6 +65,32 @@ public class TaskCrudController {
         }
         taskInfoDto = taskCrudService.saveTask(taskInfoDto);
         return "redirect:/tasks/details/" + taskInfoDto.getId();
+    }
+
+    @GetMapping("/assignunit/{requestId}/{taskId}")
+    public String assignUnit(@PathVariable long requestId, Model model) {
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(requestCrudService.findRequestbyId(requestId).getClient().getId()));
+        model.addAttribute("unitList", new UnitListDto());
+        return "/tasks/assignUnit";
+    }
+
+    @PostMapping("/assignunit/{requestId}/{taskId}")
+    public String assignUnit(@PathVariable long requestId, @PathVariable long taskId, UnitListDto unitListDto) {
+        taskCrudService.assignUnit(taskId, unitListDto);
+        requestCrudService.addUnitsToRequest(requestId, unitListDto);
+        return "redirect:/requests/details/" + requestId;
+    }
+
+    @GetMapping("/unassignunit/{id}")
+    public String unassignUnit(@PathVariable long id, Model model) {
+        model.addAttribute("taskId", id);
+        return "/tasks/unassignUnit";
+    }
+
+    @PostMapping("unassignunit/{id}")
+    public String unassignUnit(@PathVariable long id) {
+        taskCrudService.unassignunit(id);
+        return "redirect:/tasks/details/" + id;
     }
 
     @GetMapping("/delete/{id}")

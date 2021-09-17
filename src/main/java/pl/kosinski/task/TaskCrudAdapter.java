@@ -3,6 +3,7 @@ package pl.kosinski.task;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kosinski.request.RequestRepository;
+import pl.kosinski.unit.UnitListDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,20 @@ public class TaskCrudAdapter implements TaskCrudService{
         }
         taskInfoDto.setId(task.getId());
         return taskInfoDto;
+    }
+
+    @Override
+    public void assignUnit(long taskId, UnitListDto unitListDto) {
+        TaskInfoDto taskInfoDto = findTaskById(taskId);
+        taskInfoDto.setUnit(unitListDto.getUnits().get(0));
+        saveTask(taskInfoDto);
+    }
+
+    @Override
+    public void unassignunit(long taskId) {
+        TaskInfoDto taskInfoDto = findTaskById(taskId);
+        taskInfoDto.setUnit(null);
+        saveTask(taskInfoDto);
     }
 
     private Task getById(long id) {
