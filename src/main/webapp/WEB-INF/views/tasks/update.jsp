@@ -14,15 +14,6 @@
     <form:form method="post" modelAttribute="task">
         <form:hidden path="request" value="${request}"/>
         <tr>
-            <td><form:label path="unit">Unit:</form:label></td>
-            <td><form:select path="unit">
-                <form:options items="${units}" itemValue="id" itemLabel="serialNumber"/>
-                <form:option value="${null}" label="Select unit"/>
-            </form:select>
-            </td>
-            <td><form:errors path="unit" /></td>
-        </tr>
-        <tr>
             <td><form:label path="status">Status:</form:label></td>
             <td><form:select path="status">
                 <form:options items="${statuses}" itemValue="label" itemLabel="label" />

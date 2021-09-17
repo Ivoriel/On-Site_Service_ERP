@@ -64,6 +64,8 @@
             <td>${task.status}</td>
             <td>${task.unit.serialNumber}</td>
             <td>${task.description}</td>
+            <td><form action="/tasks/assignunit/${request.id}/${task.id}" method="get"> <input type="submit" value="Assign unit"></form></td>
+            <td><form action="/tasks/unassignunit/${task.id}" method="get"> <input type="submit" value="Unassign unit"></form></td>
             <td><form action="/tasks/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
             <td><form action="/tasks/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
         </tr>
