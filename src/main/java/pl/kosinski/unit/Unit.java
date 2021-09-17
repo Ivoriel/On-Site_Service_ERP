@@ -14,7 +14,6 @@ public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private long id;
     @NotNull
     private String serialNumber;
