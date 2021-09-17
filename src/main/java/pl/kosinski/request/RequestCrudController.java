@@ -9,6 +9,7 @@ import pl.kosinski.client.ClientCrudService;
 import pl.kosinski.client.ClientInfoDto;
 import pl.kosinski.common.RequestStatus;
 import pl.kosinski.common.RequestType;
+import pl.kosinski.unit.UnitCrudService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +21,7 @@ public class RequestCrudController {
 
     RequestCrudService requestCrudService;
     ClientCrudService clientCrudService;
+    UnitCrudService unitCrudService;
 
     @GetMapping("")
     public String requestsHome(Model model) {
@@ -44,7 +46,9 @@ public class RequestCrudController {
 
     @GetMapping("/details/{id}")
     public String getRequest(Model model, @PathVariable long id) {
-        model.addAttribute("request", requestCrudService.findRequestbyId(id));
+        RequestInfoDto request = requestCrudService.findRequestbyId(id);
+        model.addAttribute("request", request);
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(request.getClient().getId()));
         return "/requests/details";
     }
 
