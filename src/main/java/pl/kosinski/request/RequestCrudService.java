@@ -1,22 +1,28 @@
 package pl.kosinski.request;
 
 import org.springframework.stereotype.Service;
+import pl.kosinski.unit.UnitListDto;
 
 import java.util.List;
 
 @Service
 public interface RequestCrudService {
 
-    public RequestInfoDto saveRequest(RequestInfoDto requestInfoDto);
+    RequestInfoDto saveRequest(RequestInfoDto requestInfoDto);
 
-    public RequestInfoDto findRequestbyId(long id);
+    RequestInfoDto findRequestbyId(long id);
 
-    public void deleteRequest(long id);
+    void deleteRequest(long id);
 
-    public List<RequestInfoDto> findAllRequests();
+    List<RequestInfoDto> findAllRequests();
 
-    public List<RequestInfoDto> getRequestsByClientId(long id);
+    void addUnitsToRequest(long id, UnitListDto unitListDto);
 
-    public List<RequestInfoDto> getRequestsByUnitId(long id);
+    void removeUnitsFromRequest(long id, UnitListDto unitListDto);
+
+    List<RequestInfoDto> getRequestsByClientId(long id);
+
+    List<RequestInfoDto> getRequestsByUnitId(long id);
+
 
 }

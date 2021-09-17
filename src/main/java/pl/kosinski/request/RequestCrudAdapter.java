@@ -2,6 +2,8 @@ package pl.kosinski.request;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.kosinski.unit.Unit;
+import pl.kosinski.unit.UnitListDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,32 @@ public class RequestCrudAdapter implements RequestCrudService {
             requestInfoDtoList.add(translateToDto(request));
         }
         return requestInfoDtoList;
+    }
+
+    @Override
+    public void addUnitsToRequest(long id, UnitListDto unitListDto) {
+        RequestInfoDto requestInfoDto = findRequestbyId(id);
+        List <Unit> requestunitList = requestInfoDto.getUnits();
+        for (Unit unit : unitListDto.getUnits()) {
+            if (!requestunitList.contains(unit)) {
+                requestunitList.add(unit);
+            }
+        }
+        requestInfoDto.setUnits(requestunitList);
+        saveRequest(requestInfoDto);
+    }
+
+    @Override
+    public void removeUnitsFromRequest(long id, UnitListDto unitListDto) {
+        RequestInfoDto requestInfoDto = findRequestbyId(id);
+        List <Unit> requestunitList = requestInfoDto.getUnits();
+        for (Unit unit : unitListDto.getUnits()) {
+            if (requestunitList.contains(unit)) {
+                requestunitList.remove(unit);
+            }
+        }
+        requestInfoDto.setUnits(requestunitList);
+        saveRequest(requestInfoDto);
     }
 
     @Override
