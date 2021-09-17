@@ -40,20 +40,20 @@ public class UnitCrudController {
         return "redirect:/units";
     }
 
-    @GetMapping("/details")
+    @GetMapping("/details/{id}")
     public String getUnit(@PathVariable long id, Model model) {
-        model.addAttribute("unit", unitCrudService.getUnitsByClientId(id));
+        model.addAttribute("unit", unitCrudService.findUnitbyId(id));
         return "/units/details";
     }
 
     @GetMapping("/update/{id}")
     public String updateUnit(Model model, @PathVariable long id) {
-        model.addAttribute("client", unitCrudService.findUnitbyId(id));
+        model.addAttribute("unit", unitCrudService.findUnitbyId(id));
         return "/units/update";
     }
 
-    @PutMapping("/update/{id}")
-    public String updateClient(@Valid UnitInfoDto unitInfoDto, BindingResult result, @PathVariable long id) {
+    @PostMapping("/update/{id}")
+    public String updateUnit(@Valid UnitInfoDto unitInfoDto, BindingResult result, @PathVariable long id) {
         if (result.hasErrors()) {
             return "/units/update/" + id;
         }
@@ -61,10 +61,16 @@ public class UnitCrudController {
         return "redirect:/units";
     }
 
-    @DeleteMapping("")
-    public String deleteClient(Model model) {
-        unitCrudService.deleteUnit(Long.parseLong((String)model.getAttribute("unit")));
-        return "redirect:/clients";
+    @GetMapping("/delete/{id}")
+    public String deleteUnit(@PathVariable long id, Model model) {
+        model.addAttribute("unitId", id);
+        return "/units/delete";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteUnit(@PathVariable long id) {
+        unitCrudService.deleteUnit(id);
+        return "redirect:/units";
     }
 
     @ModelAttribute("clients")
