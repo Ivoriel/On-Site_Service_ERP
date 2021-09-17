@@ -7,10 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.kosinski.common.TaskStatus;
 import pl.kosinski.unit.UnitCrudService;
-import pl.kosinski.unit.UnitInfoDto;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/tasks")
@@ -23,22 +21,24 @@ public class TaskCrudController {
     @GetMapping("")
     public String tasksHome(Model model) {
         model.addAttribute("tasks", taskCrudService.findAllTasks());
-        return "tasksHome";
+        return "/tasks/tasksHome";
     }
 
-    @GetMapping("/create")
-    public String createTask(Model model) {
-        model.addAttribute("task", new TaskInfoDto());
+    @GetMapping("/create/{requestId}")
+    public String createTask(@PathVariable long requestId, Model model) {
+        TaskInfoDto taskInfoDto = taskCrudService.createTask(requestId);
+        model.addAttribute("task", taskInfoDto);
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(taskInfoDto.getRequest().getClient().getId()));
         return "/tasks/create";
     }
 
-    @PostMapping("/create")
-    public String createTask(@Valid TaskInfoDto taskInfoDto, BindingResult result) {
+    @PostMapping("/create/{requestId}")
+    public String createTask(@Valid TaskInfoDto taskInfoDto, BindingResult result, @PathVariable long requestId) {
         if (result.hasErrors()) {
             return "/tasks/create";
         }
-        taskInfoDto = taskCrudService.saveTask(taskInfoDto);
-        return "redirect:/tasks/details/" + taskInfoDto.getId();
+        taskCrudService.saveTask(taskInfoDto);
+        return "redirect:/requests/details/" + requestId;
     }
 
     @GetMapping("/details/{id}")
@@ -49,7 +49,9 @@ public class TaskCrudController {
 
     @GetMapping("/update/{id}")
     public String updateTask(@PathVariable long id, Model model) {
-        model.addAttribute("task", taskCrudService.findTaskById(id));
+        TaskInfoDto taskInfoDto = taskCrudService.findTaskById(id);
+        model.addAttribute("task", taskInfoDto);
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(taskInfoDto.getRequest().getClient().getId()));
         return "/tasks/update";
     }
 
@@ -70,13 +72,9 @@ public class TaskCrudController {
 
     @PostMapping("/delete/{id}")
     public String deleteTask(@PathVariable long id) {
+        TaskInfoDto taskInfoDto = taskCrudService.findTaskById(id);
         taskCrudService.deleteTask(id);
-        return "redirect:/tasks";
-    }
-
-    @ModelAttribute("units")
-    public List<UnitInfoDto> units() {
-        return unitCrudService.findAllUnits();
+        return "redirect:/requests/details/" + taskInfoDto.getRequest().getId();
     }
 
     @ModelAttribute("statuses")
