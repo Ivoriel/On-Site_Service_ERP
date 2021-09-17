@@ -39,21 +39,21 @@
         <c:forEach items="${tasks}" var="task">
             <tr>
                 <td>${task.id}</td>
-                <td>${task.request.name}</td>
-                <td>${task.type.label}</td>
+                <td>${task.request.id}</td>
+                <td>${task.unit.serialNumber}</td>
                 <td>${task.status.label}</td>
                 <td>${task.description}</td>
-                <form action="/requests/details/${task.id}" method="get">
+                <form action="/tasks/details/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/requests/update/${task.id}" method="get">
+                <form action="/tasks/update/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/requests/delete/${task.id}" method="get">
+                <form action="/tasks/delete/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>

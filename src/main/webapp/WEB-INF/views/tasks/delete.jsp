@@ -2,19 +2,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Confirm request deletion</title>
+    <title>Confirm task deletion</title>
 </head>
 <body>
     <table>
         <tr>
-            <form action="/requests/delete/${requesttId}" method="post">
+            <form action="/tasks/delete/${taskId}" method="post">
                 <td><input type="submit" value="Confirm"></td>
             </form>
-            <form action="/requests/details/${requestId}" method="get">
+            <form action="/tasks/details/${taskId}" method="get">
                 <td><input type="submit" value="Cancel"></td>
             </form>
         </tr>
-
     </table>
 </body>
 </html>

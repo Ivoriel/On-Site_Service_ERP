@@ -12,6 +12,7 @@
 <body>
     <table>
         <form:form method="post" modelAttribute="task">
+            <form:hidden path="request" value="${request}"/>
             <tr>
                 <td><form:label path="unit">Unit:</form:label></td>
                 <td><form:select path="unit">
