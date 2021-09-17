@@ -2,6 +2,7 @@ package pl.kosinski.task;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.kosinski.request.RequestRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,15 @@ import java.util.List;
 @AllArgsConstructor
 public class TaskCrudAdapter implements TaskCrudService{
 
-    TaskRepository repository;
+    TaskRepository taskRepository;
+    RequestRepository requestRepository;
+
+    @Override
+    public TaskInfoDto createTask(Long requestId) {
+        TaskInfoDto taskInfoDto = new TaskInfoDto();
+        taskInfoDto.setRequest(requestRepository.getById(requestId));
+        return taskInfoDto;
+    }
 
     @Override
     public TaskInfoDto saveTask(TaskInfoDto taskInfoDto) {
@@ -18,17 +27,17 @@ public class TaskCrudAdapter implements TaskCrudService{
         if (taskInfoDto.getId() != null) {
             task = getById(taskInfoDto.getId());
             task.setTaskInfo(taskInfoDto.getRequest(), taskInfoDto.getUnit(),taskInfoDto.getStatus(), taskInfoDto.getDescription());
-            repository.save(task);
+            taskRepository.save(task);
         } else {
             task.setTaskInfo(taskInfoDto.getRequest(), taskInfoDto.getUnit(), taskInfoDto.getStatus(), taskInfoDto.getDescription());
-            repository.save(task);
+            taskRepository.save(task);
         }
         taskInfoDto.setId(task.getId());
         return taskInfoDto;
     }
 
     private Task getById(long id) {
-        return repository.getById(id);
+        return taskRepository.getById(id);
     }
 
     @Override
@@ -38,13 +47,13 @@ public class TaskCrudAdapter implements TaskCrudService{
 
     @Override
     public void deleteTask(Long id) {
-        repository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
     @Override
     public List<TaskInfoDto> findAllTasks() {
         List<TaskInfoDto> infoDtoList = new ArrayList<>();
-        List<Task> taskList = repository.findAll();
+        List<Task> taskList = taskRepository.findAll();
         for (Task t : taskList) {
             infoDtoList.add(translateToDto(t));
         }
