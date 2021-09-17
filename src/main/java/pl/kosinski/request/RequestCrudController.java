@@ -10,6 +10,7 @@ import pl.kosinski.client.ClientInfoDto;
 import pl.kosinski.common.RequestStatus;
 import pl.kosinski.common.RequestType;
 import pl.kosinski.unit.UnitCrudService;
+import pl.kosinski.unit.UnitListDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -65,6 +66,32 @@ public class RequestCrudController {
         }
         requestInfoDto = requestCrudService.saveRequest(requestInfoDto);
         return "redirect:/requests/details/" + requestInfoDto.getId();
+    }
+
+    @GetMapping("/addunits/{id}")
+    public String addUnits(@PathVariable long id, Model model) {
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(requestCrudService.findRequestbyId(id).getClient().getId()));
+        model.addAttribute("unitList", new UnitListDto());
+        return "/requests/addUnits";
+    }
+
+    @PostMapping("/addunits/{id}")
+    public String addUnits(@PathVariable long id, UnitListDto unitListDto) {
+        requestCrudService.addUnitsToRequest(id, unitListDto);
+        return "redirect:/requests/details/" + id;
+    }
+
+    @GetMapping("/removeunits/{id}")
+    public String removeUnits(@PathVariable long id, Model model) {
+        model.addAttribute("units", unitCrudService.getUnitsByClientId(requestCrudService.findRequestbyId(id).getClient().getId()));
+        model.addAttribute("unitList", new UnitListDto());
+        return "/requests/removeUnits";
+    }
+
+    @PostMapping("/removeunits/{id}")
+    public String removeUnits(@PathVariable long id, UnitListDto unitListDto) {
+        requestCrudService.removeUnitsFromRequest(id, unitListDto);
+        return "redirect:/requests/details/" + id;
     }
 
     @GetMapping("/delete/{id}")
