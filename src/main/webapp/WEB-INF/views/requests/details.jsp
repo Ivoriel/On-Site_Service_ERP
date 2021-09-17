@@ -50,40 +50,42 @@
         </tr>
 </table>
 <table>
+    <tr>
+        <th>Task id: </th>
+        <th>Status: </th>
+        <th>Unit: </th>
+        <th>Description: </th>
+        <th>Edit: </th>
+        <th>Delete: </th>
+    </tr>
+    <c:forEach items="${request.tasks}" var="task">
+        <tr>
+            <td>${task.id}</td>
+            <td>${task.status}</td>
+            <td>${task.unit.serialNumber}</td>
+            <td>${task.description}</td>
+            <td><form action="/tasks/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
+            <td><form action="/tasks/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
         </tr>
-        <c:forEach items="${request.tasks}" var="task">
-            <tr>
-                <td>${task.id}</td>
-                <td>${task.status}</td>
-                <td>${task.unit.serialNumber}</td>
-                <td>${task.description}</td>
-                <td><form action="/tasks/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
-                <td><form action="/tasks/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
-            </tr>
-        </c:forEach>
+    </c:forEach>
 </table>
 <table>
+    <tr>
+        <td><form action="/requests/addunits/${request.id}" method="get"> <input type="submit" value="Add units"></form></td>
+        <td><form action="/requests/removeunits/${request.id}" method="get"> <input type="submit" value="Remove units"></form></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Unit id:</th>
+        <th>Serial number:</th>
+    </tr>
+    <c:forEach items="${request.units}" var="unit">
         <tr>
-            <th>
-                <form:label path="units">Add unit: </form:label>
-            </th>
-            <th>
-                <form:select path="units" multiple="true">
-                <form:options items="${units}" itemValue="id" itemLabel="serialNumber" />
-                </form:select>
-            </th>
-            <th><form:errors path="units" /></th>
+            <td>${unit.id}</td>
+            <td>${unit.serialNumber}</td>
         </tr>
-        <tr>
-            <th>Unit id:</th>
-            <th>Serial number:</th>
-        </tr>
-        <c:forEach items="${request.units}" var="unit">
-            <tr>
-                <td>${unit.id}</td>
-                <td>${unit.serialNumber}</td>
-            </tr>
-        </c:forEach>
+    </c:forEach>
 </table>
 </body>
 </html>
