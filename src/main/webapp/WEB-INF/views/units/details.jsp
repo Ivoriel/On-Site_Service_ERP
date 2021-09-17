@@ -13,8 +13,12 @@
 <body>
 <table>
         <tr>
-            <td>Name: </td>
-            <td>${unit.name}</td>
+            <td>Serial Number: </td>
+            <td>${unit.serialNumber}</td>
+        </tr>
+        <tr>
+            <td>Client: </td>
+            <td>${unit.client.name}</td>
         </tr>
         <tr>
             <td><form action="/units" method="get"> <input type="submit" value="Back to list"></form></td>

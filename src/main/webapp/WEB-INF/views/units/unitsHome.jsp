@@ -42,7 +42,7 @@
             <tr>
                 <td>${unit.id}</td>
                 <td>${unit.serialNumber}</td>
-                <td>${unit.client}</td>
+                <td>${unit.client.name}</td>
                 <form action="/units/details/${unit.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
