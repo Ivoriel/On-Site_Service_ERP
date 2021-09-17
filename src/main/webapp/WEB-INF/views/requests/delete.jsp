@@ -7,7 +7,7 @@
 <body>
     <table>
         <tr>
-            <form action="/requests/delete/${requesttId}" method="post">
+            <form action="/requests/delete/${requestId}" method="post">
                 <td><input type="submit" value="Confirm"></td>
             </form>
             <form action="/requests/details/${requestId}" method="get">
