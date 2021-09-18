@@ -21,10 +21,12 @@ public class RequestCrudAdapter implements RequestCrudService {
             request = getById(requestInfoDto.getId());
             request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief(), requestInfoDto.getDebrief());
             request.updateTasksAndUnits(requestInfoDto.getTasks(), requestInfoDto.getUnits());
+            request.updateWorkTime(requestInfoDto.getWorkTime());
             repository.save(request);
         } else {
             request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief(), requestInfoDto.getDebrief());
             request.updateTasksAndUnits(requestInfoDto.getTasks(), requestInfoDto.getUnits());
+            request.updateWorkTime(requestInfoDto.getWorkTime());
             repository.save(request);
         }
         requestInfoDto.setId(request.getId());
@@ -101,6 +103,30 @@ public class RequestCrudAdapter implements RequestCrudService {
         return requestInfoDtoList;
     }
 
+    @Override
+    public void addToWorkTime(RequestWorkTimeDto requestWorkTimeDto) {
+        Request request = getById(requestWorkTimeDto.getRequestId());
+        if (request.getWorkTime() == null) {
+            request.updateWorkTime(requestWorkTimeDto.getWorkTime());
+        } else {
+            int requestWorkTime = request.getWorkTime();
+            requestWorkTime = requestWorkTime + requestWorkTimeDto.getWorkTime();
+            request.updateWorkTime(requestWorkTime);
+        }
+        repository.save(request);
+    }
+
+    @Override
+    public void subtractFromWorkTime(RequestWorkTimeDto requestWorkTimeDto) {
+        Request request = getById(requestWorkTimeDto.getRequestId());
+        int requestWorkTime = request.getWorkTime();
+        if (requestWorkTimeDto.getWorkTime() <= requestWorkTime){
+            requestWorkTime = requestWorkTime - requestWorkTimeDto.getWorkTime();
+            request.updateWorkTime(requestWorkTime);
+            repository.save(request);
+        }
+    }
+
     private RequestInfoDto translateToDto(Request request) {
         RequestInfoDto requestDto = new RequestInfoDto();
         requestDto.setId(request.getId());
@@ -111,6 +137,7 @@ public class RequestCrudAdapter implements RequestCrudService {
         requestDto.setDebrief(request.getDebrief());
         requestDto.setUnits(request.getUnits());
         requestDto.setTasks(request.getTasks());
+        requestDto.setWorkTime(request.getWorkTime());
         return requestDto;
     }
 }
