@@ -94,6 +94,34 @@ public class RequestCrudController {
         return "redirect:/requests/details/" + id;
     }
 
+    @GetMapping("/addtoworktime/{id}")
+    public String addToWorkTime(@PathVariable long id, Model model) {
+        RequestWorkTimeDto requestWorkTimeDto = new RequestWorkTimeDto();
+        requestWorkTimeDto.setRequestId(id);
+        model.addAttribute("request", requestWorkTimeDto);
+        return "/requests/addToWorkTime";
+    }
+
+    @PostMapping("/addtoworktime/{id}")
+    public String addToWorkTime(@PathVariable long id, RequestWorkTimeDto requestWorkTimeDto) {
+        requestCrudService.addToWorkTime(requestWorkTimeDto);
+        return "redirect:/requests/details/" + id;
+    }
+
+    @GetMapping("/subtractfromworktime/{id}")
+    public String subtractFromWorkTime(@PathVariable long id, Model model) {
+        RequestWorkTimeDto requestWorkTimeDto = new RequestWorkTimeDto();
+        requestWorkTimeDto.setRequestId(id);
+        model.addAttribute("request", requestWorkTimeDto);
+        return "/requests/subtractFromWorkTime";
+    }
+
+    @PostMapping("/subtractfromworktime/{id}")
+    public String subtractFromWorkTime(@PathVariable long id, RequestWorkTimeDto requestWorkTimeDto) {
+        requestCrudService.subtractFromWorkTime(requestWorkTimeDto);
+        return "redirect:/requests/details/" + id;
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteRequest(Model model, @PathVariable long id) {
         model.addAttribute("requestId", id);
