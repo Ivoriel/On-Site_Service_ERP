@@ -24,5 +24,8 @@ public interface RequestCrudService {
 
     List<RequestInfoDto> getRequestsByUnitId(long id);
 
+    void addToWorkTime(RequestWorkTimeDto requestWorkTimeDto);
+
+    void subtractFromWorkTime(RequestWorkTimeDto requestWorkTimeDto);
 
 }
