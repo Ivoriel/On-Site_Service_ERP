@@ -13,4 +13,5 @@ public class TaskInfoDto {
     private Unit unit;
     private TaskStatus status;
     private String description;
+    private Integer workTime;
 }

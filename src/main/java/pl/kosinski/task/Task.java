@@ -27,6 +27,7 @@ public class Task {
     @NotNull
     private TaskStatus status;
     private String description;
+    private Integer workTime;
 
     public void setTaskInfo(Request request, Unit unit, TaskStatus status, String description) {
         this.request = request;
@@ -34,4 +35,9 @@ public class Task {
         this.status = status;
         this.description = description;
     }
+
+    public void setWorkTime(Integer workTime) {
+        this.workTime = workTime;
+    }
+
 }
