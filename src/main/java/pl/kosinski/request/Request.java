@@ -37,9 +37,9 @@ public class Request {
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "unit_id"))
     private List<Unit> units = new ArrayList<>();
-
     @OneToMany(mappedBy = "request")
     private List<Task> tasks = new ArrayList<>();
+    private Integer workTime;
 
     public void setRequestInfo(Client client, RequestType type, RequestStatus status, String brief, String debrief) {
         this.client = client;
@@ -52,5 +52,9 @@ public class Request {
     public void updateTasksAndUnits(List<Task> tasks, List<Unit> units) {
         this.tasks = tasks;
         this.units = units;
+    }
+
+    public void updateWorkTime (int workTime) {
+        this.workTime = workTime;
     }
 }

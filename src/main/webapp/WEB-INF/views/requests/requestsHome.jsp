@@ -40,6 +40,7 @@
             <th>Debrief</th>
             <th>Units</th>
             <th>Tasks</th>
+            <th>Work time</th>
             <th>Details</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -54,6 +55,7 @@
                 <td>${request.debrief}</td>
                 <td>${request.units.size()}</td>
                 <td>${request.tasks.size()}</td>
+                <td>${request.workTime}</td>
                 <form action="/requests/details/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Details">

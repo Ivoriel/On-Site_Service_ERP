@@ -20,4 +20,5 @@ public class RequestInfoDto {
     private String debrief;
     private List<Unit> units;
     private List<Task> tasks;
+    private Integer workTime;
 }

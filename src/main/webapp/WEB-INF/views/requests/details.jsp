@@ -45,6 +45,14 @@
         </tr>
 </table>
 <table>
+    <tr>
+        <th>Combined work time:</th>
+        <th>${request.workTime}</th>
+        <td><form action="/requests/addtoworktime/${request.id}" method="get"> <input type="submit" value="Add to work time"></form></td>
+        <td><form action="/requests/subtractfromworktime/${request.id}" method="get"> <input type="submit" value="Subtract from work time"></form></td>
+    </tr>
+</table>
+<table>
         <tr>
             <td><form action="/tasks/create/${request.id}" method="get"> <input type="submit" value="Create task"></form></td>
         </tr>
