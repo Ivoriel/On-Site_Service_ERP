@@ -28,9 +28,11 @@ public class TaskCrudAdapter implements TaskCrudService{
         if (taskInfoDto.getId() != null) {
             task = getById(taskInfoDto.getId());
             task.setTaskInfo(taskInfoDto.getRequest(), taskInfoDto.getUnit(),taskInfoDto.getStatus(), taskInfoDto.getDescription());
+            task.setWorkTime(taskInfoDto.getWorkTime());
             taskRepository.save(task);
         } else {
             task.setTaskInfo(taskInfoDto.getRequest(), taskInfoDto.getUnit(), taskInfoDto.getStatus(), taskInfoDto.getDescription());
+            task.setWorkTime(taskInfoDto.getWorkTime());
             taskRepository.save(task);
         }
         taskInfoDto.setId(task.getId());
@@ -82,6 +84,7 @@ public class TaskCrudAdapter implements TaskCrudService{
         infoDto.setUnit(task.getUnit());
         infoDto.setStatus(task.getStatus());
         infoDto.setDescription(task.getDescription());
+        infoDto.setWorkTime(task.getWorkTime());
         return infoDto;
     }
 
