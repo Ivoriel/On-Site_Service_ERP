@@ -43,17 +43,17 @@
                 <td>${unit.id}</td>
                 <td>${unit.serialNumber}</td>
                 <td>${unit.client.name}</td>
-                <form action="/units/details/${unit.id}" method="get">
+                <form action="/units/form/details/${unit.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/units/update/${unit.id}" method="get">
+                <form action="/units/form/update/${unit.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/units/delete/${unit.id}" method="get">
+                <form action="/units/form/delete/${unit.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>

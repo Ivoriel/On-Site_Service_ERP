@@ -21,9 +21,9 @@
             <td>${unit.client.name}</td>
         </tr>
         <tr>
-            <td><form action="/units" method="get"> <input type="submit" value="Back to list"></form></td>
-            <td><form action="/units/update/${unit.id}" method="get"> <input type="submit" value="Update unit"></form></td>
-            <td><form action="/units/delete/${unit.id}" method="get"> <input type="submit" value="Delete unit"></form></td>
+            <td><form action="/units/form" method="get"> <input type="submit" value="Back to list"></form></td>
+            <td><form action="/units/form/update/${unit.id}" method="get"> <input type="submit" value="Update unit"></form></td>
+            <td><form action="/units/form/delete/${unit.id}" method="get"> <input type="submit" value="Delete unit"></form></td>
         </tr>
 <%--        <c:forEach items="${clientUnits}" var="unit">--%>
 <%--            <tr>--%>

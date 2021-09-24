@@ -7,10 +7,10 @@
 <body>
     <table>
         <tr>
-            <form action="/units/delete/${unitId}" method="post">
+            <form action="/units/form/delete/${unitId}" method="post">
                 <td><input type="submit" value="Confirm"></td>
             </form>
-            <form action="/units/details/${unitId}" method="get">
+            <form action="/units/form/details/${unitId}" method="get">
                 <td><input type="submit" value="Cancel"></td>
             </form>
         </tr>
