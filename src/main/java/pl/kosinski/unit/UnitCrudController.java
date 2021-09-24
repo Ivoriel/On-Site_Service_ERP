@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/units")
+@RequestMapping("/units/form")
 @AllArgsConstructor
 public class UnitCrudController {
 
