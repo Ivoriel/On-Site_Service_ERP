@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/requests")
+@RequestMapping("/requests/form")
 @AllArgsConstructor
 public class RequestCrudController {
 
