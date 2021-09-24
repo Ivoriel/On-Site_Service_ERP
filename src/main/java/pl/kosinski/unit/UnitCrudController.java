@@ -37,7 +37,7 @@ public class UnitCrudController {
             return "/units/create";
         }
         unitCrudService.saveUnit(unitInfoDto);
-        return "redirect:/units";
+        return "redirect:/units/form";
     }
 
     @GetMapping("/details/{id}")
@@ -58,7 +58,7 @@ public class UnitCrudController {
             return "/units/update/" + id;
         }
         unitCrudService.saveUnit(unitInfoDto);
-        return "redirect:/units";
+        return "redirect:/units/form";
     }
 
     @GetMapping("/delete/{id}")
@@ -70,7 +70,7 @@ public class UnitCrudController {
     @PostMapping("/delete/{id}")
     public String deleteUnit(@PathVariable long id) {
         unitCrudService.deleteUnit(id);
-        return "redirect:/units";
+        return "redirect:/units/form";
     }
 
     @ModelAttribute("clients")
