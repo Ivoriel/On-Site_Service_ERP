@@ -17,9 +17,9 @@
             <td>${client.name}</td>
         </tr>
         <tr>
-            <td><form action="/clients" method="get"> <input type="submit" value="Back to list"></form></td>
-            <td><form action="/clients/update/${client.id}" method="get"> <input type="submit" value="Update client"></form></td>
-            <td><form action="/clients/delete/${client.id}" method="get"> <input type="submit" value="Delete client"></form></td>
+            <td><form action="/clients/form" method="get"> <input type="submit" value="Back to list"></form></td>
+            <td><form action="/clients/form/update/${client.id}" method="get"> <input type="submit" value="Update client"></form></td>
+            <td><form action="/clients/form/delete/${client.id}" method="get"> <input type="submit" value="Delete client"></form></td>
         </tr>
         <tr>
             <th>Unit id:</th>

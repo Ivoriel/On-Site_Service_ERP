@@ -9,22 +9,22 @@
     <table>
         <tr>
             <td>
-                <form action="/clients/create">
+                <form action="/clients/form/create">
                     <input type="submit" value="Add client">
                 </form>
             </td>
             <td>
-                <form action="/units">
+                <form action="/units/form">
                     <input type="submit" value="Units list">
                 </form>
             </td>
             <td>
-                <form action="/requests">
+                <form action="/requests/form">
                     <input type="submit" value="Requests list">
                 </form>
             </td>
             <td>
-                <form action="/tasks">
+                <form action="/tasks/form">
                     <input type="submit" value="Tasks list">
                 </form>
             </td>
@@ -42,17 +42,17 @@
             <tr>
                 <td>${client.id}</td>
                 <td>${client.name}</td>
-                <form action="/clients/details/${client.id}" method="get">
+                <form action="/clients/form/details/${client.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/clients/update/${client.id}" method="get">
+                <form action="/clients/form/update/${client.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/clients/delete/${client.id}" method="get">
+                <form action="/clients/form/delete/${client.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>
