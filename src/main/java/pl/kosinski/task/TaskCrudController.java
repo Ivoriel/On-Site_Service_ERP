@@ -13,7 +13,7 @@ import pl.kosinski.unit.UnitListDto;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/tasks")
+@RequestMapping("/tasks/form")
 @AllArgsConstructor
 public class TaskCrudController {
 
@@ -41,7 +41,7 @@ public class TaskCrudController {
             return "/tasks/create";
         }
         taskCrudService.saveTask(taskInfoDto);
-        return "redirect:/requests/details/" + requestId;
+        return "redirect:/requests/form/details/" + requestId;
     }
 
     @GetMapping("/details/{id}")
@@ -64,7 +64,7 @@ public class TaskCrudController {
             return "/tasks/update";
         }
         taskInfoDto = taskCrudService.saveTask(taskInfoDto);
-        return "redirect:/tasks/details/" + taskInfoDto.getId();
+        return "redirect:/tasks/form/details/" + taskInfoDto.getId();
     }
 
     @GetMapping("/assignunit/{requestId}/{taskId}")
@@ -78,7 +78,7 @@ public class TaskCrudController {
     public String assignUnit(@PathVariable long requestId, @PathVariable long taskId, UnitListDto unitListDto) {
         taskCrudService.assignUnit(taskId, unitListDto);
         requestCrudService.addUnitsToRequest(requestId, unitListDto);
-        return "redirect:/requests/details/" + requestId;
+        return "redirect:/requests/form/details/" + requestId;
     }
 
     @GetMapping("/unassignunit/{id}")
@@ -90,7 +90,7 @@ public class TaskCrudController {
     @PostMapping("unassignunit/{id}")
     public String unassignUnit(@PathVariable long id) {
         taskCrudService.unassignunit(id);
-        return "redirect:/tasks/details/" + id;
+        return "redirect:/tasks/form/details/" + id;
     }
 
     @GetMapping("/delete/{id}")
@@ -103,7 +103,7 @@ public class TaskCrudController {
     public String deleteTask(@PathVariable long id) {
         TaskInfoDto taskInfoDto = taskCrudService.findTaskById(id);
         taskCrudService.deleteTask(id);
-        return "redirect:/requests/details/" + taskInfoDto.getRequest().getId();
+        return "redirect:/requests/form/details/" + taskInfoDto.getRequest().getId();
     }
 
     @ModelAttribute("statuses")
