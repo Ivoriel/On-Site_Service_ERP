@@ -9,22 +9,22 @@
     <table>
         <tr>
             <td>
-                <form action="/units/create">
+                <form action="/units/form/create">
                     <input type="submit" value="Add unit">
                 </form>
             </td>
             <td>
-                <form action="/clients">
+                <form action="/clients/form">
                     <input type="submit" value="Clients list">
                 </form>
             </td>
             <td>
-                <form action="/requests">
+                <form action="/requests/form">
                     <input type="submit" value="Requests list">
                 </form>
             </td>
             <td>
-                <form action="/tasks">
+                <form action="/tasks/form">
                     <input type="submit" value="Tasks list">
                 </form>
             </td>
