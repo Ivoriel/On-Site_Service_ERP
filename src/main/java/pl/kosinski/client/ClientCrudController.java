@@ -35,7 +35,7 @@ public class ClientCrudController {
             return "/clients/create";
         }
         clientInfoDto = clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients/details/" + clientInfoDto.getId();
+        return "redirect:/clients/form/details/" + clientInfoDto.getId();
     }
 
     @GetMapping("/details/{id}")
@@ -57,7 +57,7 @@ public class ClientCrudController {
             return "/clients/update/" + id;
         }
         clientInfoDto = clientCrudService.saveClient(clientInfoDto);
-        return "redirect:/clients/details/" + clientInfoDto.getId();
+        return "redirect:/clients/form/details/" + clientInfoDto.getId();
     }
 
     @GetMapping("/delete/{id}")
