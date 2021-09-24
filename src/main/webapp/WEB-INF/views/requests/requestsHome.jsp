@@ -9,22 +9,22 @@
     <table>
         <tr>
             <td>
-                <form action="/requests/create">
+                <form action="/requests/form/create">
                     <input type="submit" value="Add request">
                 </form>
             </td>
             <td>
-                <form action="/clients">
+                <form action="/clients/form">
                     <input type="submit" value="Clients list">
                 </form>
             </td>
             <td>
-                <form action="/units">
+                <form action="/units/form">
                     <input type="submit" value="Units list">
                 </form>
             </td>
             <td>
-                <form action="/tasks">
+                <form action="/tasks/form">
                     <input type="submit" value="Tasks list">
                 </form>
             </td>
@@ -56,17 +56,17 @@
                 <td>${request.units.size()}</td>
                 <td>${request.tasks.size()}</td>
                 <td>${request.workTime}</td>
-                <form action="/requests/details/${request.id}" method="get">
+                <form action="/requests/form/details/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/requests/update/${request.id}" method="get">
+                <form action="/requests/form/update/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/requests/delete/${request.id}" method="get">
+                <form action="/requests/form/delete/${request.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>

@@ -13,9 +13,9 @@
 <body>
 <table>
     <tr>
-        <td><form action="/requests" method="get"> <input type="submit" value="Back to list"></form></td>
-        <td><form action="/requests/update/${request.id}" method="get"> <input type="submit" value="Update request"></form></td>
-        <td><form action="/requests/delete/${request.id}" method="get"> <input type="submit" value="Delete request"></form></td>
+        <td><form action="/requests/form" method="get"> <input type="submit" value="Back to list"></form></td>
+        <td><form action="/requests/form/update/${request.id}" method="get"> <input type="submit" value="Update request"></form></td>
+        <td><form action="/requests/form/delete/${request.id}" method="get"> <input type="submit" value="Delete request"></form></td>
     </tr>
 </table>
 <table>
@@ -48,13 +48,13 @@
     <tr>
         <th>Combined work time:</th>
         <th>${request.workTime}</th>
-        <td><form action="/requests/addtoworktime/${request.id}" method="get"> <input type="submit" value="Add to work time"></form></td>
-        <td><form action="/requests/subtractfromworktime/${request.id}" method="get"> <input type="submit" value="Subtract from work time"></form></td>
+        <td><form action="/requests/form/addtoworktime/${request.id}" method="get"> <input type="submit" value="Add to work time"></form></td>
+        <td><form action="/requests/form/subtractfromworktime/${request.id}" method="get"> <input type="submit" value="Subtract from work time"></form></td>
     </tr>
 </table>
 <table>
         <tr>
-            <td><form action="/tasks/create/${request.id}" method="get"> <input type="submit" value="Create task"></form></td>
+            <td><form action="/tasks/form/create/${request.id}" method="get"> <input type="submit" value="Create task"></form></td>
         </tr>
 </table>
 <table>
@@ -72,17 +72,17 @@
             <td>${task.status}</td>
             <td>${task.unit.serialNumber}</td>
             <td>${task.description}</td>
-            <td><form action="/tasks/assignunit/${request.id}/${task.id}" method="get"> <input type="submit" value="Assign unit"></form></td>
-            <td><form action="/tasks/unassignunit/${task.id}" method="get"> <input type="submit" value="Unassign unit"></form></td>
-            <td><form action="/tasks/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
-            <td><form action="/tasks/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
+            <td><form action="/tasks/form/assignunit/${request.id}/${task.id}" method="get"> <input type="submit" value="Assign unit"></form></td>
+            <td><form action="/tasks/form/unassignunit/${task.id}" method="get"> <input type="submit" value="Unassign unit"></form></td>
+            <td><form action="/tasks/form/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
+            <td><form action="/tasks/form/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
         </tr>
     </c:forEach>
 </table>
 <table>
     <tr>
-        <td><form action="/requests/addunits/${request.id}" method="get"> <input type="submit" value="Add units"></form></td>
-        <td><form action="/requests/removeunits/${request.id}" method="get"> <input type="submit" value="Remove units"></form></td>
+        <td><form action="/requests/form/addunits/${request.id}" method="get"> <input type="submit" value="Add units"></form></td>
+        <td><form action="/requests/form/removeunits/${request.id}" method="get"> <input type="submit" value="Remove units"></form></td>
     </tr>
 </table>
 <table>
