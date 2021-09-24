@@ -10,7 +10,7 @@ import pl.kosinski.unit.UnitCrudService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/clients")
+@RequestMapping("/clients/form")
 @AllArgsConstructor
 public class ClientCrudController {
 
