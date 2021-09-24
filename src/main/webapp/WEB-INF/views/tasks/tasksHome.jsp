@@ -9,17 +9,17 @@
     <table>
         <tr>
             <td>
-                <form action="/clients">
+                <form action="/clients/form">
                     <input type="submit" value="Clients list">
                 </form>
             </td>
             <td>
-                <form action="/units">
+                <form action="/units/form">
                     <input type="submit" value="Units list">
                 </form>
             </td>
             <td>
-                <form action="/requests">
+                <form action="/requests/form">
                     <input type="submit" value="Requests list">
                 </form>
             </td>
@@ -43,17 +43,17 @@
                 <td>${task.unit.serialNumber}</td>
                 <td>${task.status.label}</td>
                 <td>${task.description}</td>
-                <form action="/tasks/details/${task.id}" method="get">
+                <form action="/tasks/form/details/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Details">
                     </td>
                 </form>
-                <form action="/tasks/update/${task.id}" method="get">
+                <form action="/tasks/form/update/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Edit">
                     </td>
                 </form>
-                <form action="/tasks/delete/${task.id}" method="get">
+                <form action="/tasks/form/delete/${task.id}" method="get">
                     <td>
                         <input type="submit" value="Delete">
                     </td>

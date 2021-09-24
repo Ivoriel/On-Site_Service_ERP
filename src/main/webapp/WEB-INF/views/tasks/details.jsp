@@ -29,9 +29,9 @@
             <td>${task.description}</td>
         </tr>
         <tr>
-            <td><form action="/requests/details/${task.request.id}" method="get"> <input type="submit" value="Back to request"></form></td>
-            <td><form action="/tasks/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
-            <td><form action="/tasks/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
+            <td><form action="/requests/form/details/${task.request.id}" method="get"> <input type="submit" value="Back to request"></form></td>
+            <td><form action="/tasks/form/update/${task.id}" method="get"> <input type="submit" value="Update task"></form></td>
+            <td><form action="/tasks/form/delete/${task.id}" method="get"> <input type="submit" value="Delete task"></form></td>
         </tr>
 </table>
 </body>
