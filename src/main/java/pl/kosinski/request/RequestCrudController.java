@@ -42,7 +42,7 @@ public class RequestCrudController {
             return "/requests/create";
         }
         requestInfoDto = requestCrudService.saveRequest(requestInfoDto);
-        return "redirect:/requests/details/" + requestInfoDto.getId();
+        return "redirect:/requests/form/details/" + requestInfoDto.getId();
     }
 
     @GetMapping("/details/{id}")
@@ -105,7 +105,7 @@ public class RequestCrudController {
     @PostMapping("/addtoworktime/{id}")
     public String addToWorkTime(@PathVariable long id, RequestWorkTimeDto requestWorkTimeDto) {
         requestCrudService.addToWorkTime(requestWorkTimeDto);
-        return "redirect:/requests/details/" + id;
+        return "redirect:/requests/form/details/" + id;
     }
 
     @GetMapping("/subtractfromworktime/{id}")
@@ -119,7 +119,7 @@ public class RequestCrudController {
     @PostMapping("/subtractfromworktime/{id}")
     public String subtractFromWorkTime(@PathVariable long id, RequestWorkTimeDto requestWorkTimeDto) {
         requestCrudService.subtractFromWorkTime(requestWorkTimeDto);
-        return "redirect:/requests/details/" + id;
+        return "redirect:/requests/form/details/" + id;
     }
 
     @GetMapping("/delete/{id}")
