@@ -12,6 +12,14 @@ Several technical assumptions were made at the begining of development:
 5. The application would be of the monolithic variant.
 6. For practice DTOs would be utilised instead of entity objects.
 
+Core elements of the program are:
+1. Clients - owners of the sites and units.
+2. Sites - belong to clients and contain a number of units.
+3. Units - belong to the clients and have a designated site.
+4. Requests - main device for tracking service actions. 
+5. Tasks - secondary device for tracking service actions or their elements.
+6. Engineers - persons performing the service.
+
 As for the domain assumptions they are as follows:
 1. The clients can possess multiple units and sites. There may be multiple units in one site. However, a unit can be assigned to one client at one site.
 2. Service actions are tracked using requests and tasks. Requests may be assignd to only one client and only one site. Tasks exist only within a given request and can be assigned to only one request.
