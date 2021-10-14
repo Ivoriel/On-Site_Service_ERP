@@ -38,7 +38,7 @@ class RequestCrudAdapterTest {
         RequestInfoDto request = generateRequestWithoutTasksAndWorkTime();
         requestCrudAdapter.saveRequest(request);
         request.setId(1L);
-        assertEquals(request, requestCrudAdapter.getRequestsByClientId(request.getId()));
+        assertEquals(request, requestCrudAdapter.findRequestbyId(1));
     }
 
     @Test
@@ -62,13 +62,13 @@ class RequestCrudAdapterTest {
     }
 
     private RequestInfoDto generateRequestWithoutTasksAndWorkTime() {
-        RequestInfoDto request = new RequestInfoDto();
-        var clientDto = new ClientInfoDto();
-        clientDto.setName("clientName");
-        var clientCrudAdapter = new ClientCrudAdapter(clientRepository);
-        var client = clientCrudAdapter.saveClient(clientDto);
-        Unit unit1 = new Unit();
+        var request = new RequestInfoDto();
+        var client = new Client();
+        client.setName("clientName");
+        clientRepository.save(client);
+        var unit1 = new Unit();
         unit1.setUnitInfo("12345", client);
+        unitRepository.save(unit1);
         List<Unit> units = new ArrayList<>();
         units.add(unit1);
         request.setClient(client);
