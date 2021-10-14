@@ -6,6 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.kosinski.client.Client;
+import pl.kosinski.client.ClientCrudAdapter;
+import pl.kosinski.client.ClientInfoDto;
+import pl.kosinski.client.ClientRepository;
+import pl.kosinski.common.RequestStatus;
+import pl.kosinski.common.RequestType;
+import pl.kosinski.unit.Unit;
+import pl.kosinski.unit.UnitRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -13,14 +26,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 class RequestCrudAdapterTest {
 
     @Autowired
-    RequestRepository repository;
+    RequestRepository requestRepository;
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    UnitRepository unitRepository;
 
     @Test
-    void givenRequestNotPresentInDb_whenRequestAddedtoDB_thenRequestShouldBeRetrievable() {
-        RequestCrudAdapter requestCrudAdapter = new RequestCrudAdapter(repository);
-        Request request = new Request();
-//        request.setRequestInfo(ServiceRequestType.MAINTENANCE, ServiceRequestStatus.OPEN, "Test brief1");
-
+    void givenRequestNotPresentInDb_whenRequestAddedToDB_thenRequestShouldBeRetrievable() {
+        RequestCrudAdapter requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        RequestInfoDto request = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request);
+        request.setId(1L);
+        assertEquals(request, requestCrudAdapter.getRequestsByClientId(request.getId()));
     }
 
     @Test
@@ -42,4 +60,24 @@ class RequestCrudAdapterTest {
     @Test
     void getRequestsByUnitId() {
     }
+
+    private RequestInfoDto generateRequestWithoutTasksAndWorkTime() {
+        RequestInfoDto request = new RequestInfoDto();
+        var clientDto = new ClientInfoDto();
+        clientDto.setName("clientName");
+        var clientCrudAdapter = new ClientCrudAdapter(clientRepository);
+        var client = clientCrudAdapter.saveClient(clientDto);
+        Unit unit1 = new Unit();
+        unit1.setUnitInfo("12345", client);
+        List<Unit> units = new ArrayList<>();
+        units.add(unit1);
+        request.setClient(client);
+        request.setType(RequestType.MAINTENANCE);
+        request.setStatus(RequestStatus.OPEN);
+        request.setBrief("testBrief");
+        request.setDebrief("testDebrief");
+        request.setUnits(units);
+        return request;
+    }
+
 }
