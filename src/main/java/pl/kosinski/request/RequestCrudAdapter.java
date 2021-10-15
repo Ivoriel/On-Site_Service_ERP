@@ -26,7 +26,7 @@ public class RequestCrudAdapter implements RequestCrudService {
         } else {
             request.setRequestInfo(requestInfoDto.getClient(), requestInfoDto.getType(), requestInfoDto.getStatus(), requestInfoDto.getBrief(), requestInfoDto.getDebrief());
             request.updateTasksAndUnits(requestInfoDto.getTasks(), requestInfoDto.getUnits());
-            request.updateWorkTime(requestInfoDto.getWorkTime());
+//            request.updateWorkTime(requestInfoDto.getWorkTime());
             repository.save(request);
         }
         requestInfoDto.setId(request.getId());
