@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.kosinski.client.Client;
@@ -17,8 +18,10 @@ import pl.kosinski.unit.UnitRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -42,11 +45,14 @@ class RequestCrudAdapterTest {
     }
 
     @Test
-    void findRequestbyId() {
-    }
-
-    @Test
-    void deleteRequest() {
+    void givenRequestPresentInDb_whenRequestDeletedFromDb_thenRequestShouldNotBeRetrievable() {
+        RequestCrudAdapter requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        RequestInfoDto request = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request);
+        request.setId(1L);
+        assertEquals(request, requestCrudAdapter.findRequestbyId(1));
+        requestCrudAdapter.deleteRequest(1);
+        assertThrows(JpaObjectRetrievalFailureException.class, () -> requestCrudAdapter.findRequestbyId(1));
     }
 
     @Test
