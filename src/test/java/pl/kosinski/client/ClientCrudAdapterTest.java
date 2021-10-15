@@ -44,7 +44,7 @@ class ClientCrudAdapterTest {
         clientCrudAdapter.saveClient(clientInfoDto2);
         assertEquals(clientInfoDto1, clientCrudAdapter.findClientById(1));
         clientCrudAdapter.deleteClient(1);
-        assertThrows(NoSuchElementException.class, () -> clientCrudAdapter.findClientById(2));
+        assertThrows(NoSuchElementException.class, () -> clientCrudAdapter.findClientById(1));
     }
 
     @Test
