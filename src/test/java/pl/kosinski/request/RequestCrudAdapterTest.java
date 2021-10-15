@@ -37,8 +37,8 @@ class RequestCrudAdapterTest {
 
     @Test
     void givenRequestNotPresentInDb_whenRequestAddedToDB_thenRequestShouldBeRetrievable() {
-        RequestCrudAdapter requestCrudAdapter = new RequestCrudAdapter(requestRepository);
-        RequestInfoDto request = generateRequestWithoutTasksAndWorkTime();
+        var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        var request = generateRequestWithoutTasksAndWorkTime();
         requestCrudAdapter.saveRequest(request);
         request.setId(1L);
         assertEquals(request, requestCrudAdapter.findRequestbyId(1));
@@ -46,8 +46,8 @@ class RequestCrudAdapterTest {
 
     @Test
     void givenRequestPresentInDb_whenRequestDeletedFromDb_thenRequestShouldNotBeRetrievable() {
-        RequestCrudAdapter requestCrudAdapter = new RequestCrudAdapter(requestRepository);
-        RequestInfoDto request = generateRequestWithoutTasksAndWorkTime();
+        var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        var request = generateRequestWithoutTasksAndWorkTime();
         requestCrudAdapter.saveRequest(request);
         request.setId(1L);
         assertEquals(request, requestCrudAdapter.findRequestbyId(1));
@@ -57,6 +57,7 @@ class RequestCrudAdapterTest {
 
     @Test
     void findAllRequests() {
+        var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
     }
 
     @Test
