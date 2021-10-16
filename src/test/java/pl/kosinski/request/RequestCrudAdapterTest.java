@@ -56,8 +56,18 @@ class RequestCrudAdapterTest {
     }
 
     @Test
-    void findAllRequests() {
+    void givenRequestsPresentInDb_whenFinDAllRequestsMethodCalled_thenAllRequestsShouldBeRetrievable() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        List<RequestInfoDto> requestList = new ArrayList<>();
+        var request1 = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request1);
+        request1.setId(1L);
+        requestList.add(request1);
+        var request2 = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request2);
+        request2.setId(2L);
+        requestList.add(request2);
+        assertEquals(requestList, requestCrudAdapter.findAllRequests());
     }
 
     @Test
