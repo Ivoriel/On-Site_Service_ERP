@@ -71,7 +71,14 @@ class RequestCrudAdapterTest {
     }
 
     @Test
-    void getRequestsByClientId() {
+    void givenRequestsPresentInDb_whenRequestsCalled_thenRequestsShouldBeRetrievableByClientId() {
+        var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        List<RequestInfoDto> requestList = new ArrayList<>();
+        var request1 = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request1);
+        request1.setId(1L);
+        requestList.add(request1);
+        assertEquals(requestList, requestCrudAdapter.getRequestsByClientId(request1.getClient().getId()));
     }
 
     @Test
