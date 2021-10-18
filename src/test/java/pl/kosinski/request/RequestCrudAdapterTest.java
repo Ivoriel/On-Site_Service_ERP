@@ -83,6 +83,13 @@ class RequestCrudAdapterTest {
 
     @Test
     void getRequestsByUnitId() {
+        var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
+        List<RequestInfoDto> requestList = new ArrayList<>();
+        var request1 = generateRequestWithoutTasksAndWorkTime();
+        requestCrudAdapter.saveRequest(request1);
+        request1.setId(1L);
+        requestList.add(request1);
+        assertEquals(requestList, requestCrudAdapter.getRequestsByUnitId(request1.getUnits().get(0).getId()));
     }
 
     private RequestInfoDto generateRequestWithoutTasksAndWorkTime() {
