@@ -11,8 +11,8 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> getServiceReqByClientId(long id);
 
-    @Query(value = "SELECT * FROM service_request s " +
-            "JOIN service_requests_units ru ON s.id = ru.service_request_id " +
+    @Query(value = "SELECT * FROM request r " +
+            "JOIN requests_units ru ON r.id = ru.request_id " +
             "WHERE ru.unit_id = :id", nativeQuery = true)
     List<Request> getServiceReqByUnitId(long id);
 }
