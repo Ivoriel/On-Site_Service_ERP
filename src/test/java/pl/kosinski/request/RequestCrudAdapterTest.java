@@ -75,12 +75,20 @@ class RequestCrudAdapterTest {
     void givenRequestsPresentInDb_whenRequestsCalled_thenRequestsShouldBeRetrievableByClientId() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
         List<RequestInfoDto> requestList = new ArrayList<>();
-        var client = generateUniqueClient();
-        var request1 = generateRequestWithoutTasksAndWorkTime(client, generateUniqueUnit(client));
+        var client1 = generateUniqueClient();
+        var request1 = generateRequestWithoutTasksAndWorkTime(client1, generateUniqueUnit(client1));
         requestCrudAdapter.saveRequest(request1);
         request1.setId(1L);
         requestList.add(request1);
-        assertEquals(requestList, requestCrudAdapter.getRequestsByClientId(request1.getClient().getId()));
+        var request2 = generateRequestWithoutTasksAndWorkTime(client1, generateUniqueUnit(client1));
+        requestCrudAdapter.saveRequest(request2);
+        request2.setId(2L);
+        requestList.add(request2);
+        var client2 = generateUniqueClient();
+        var request3 = generateRequestWithoutTasksAndWorkTime(client2, generateUniqueUnit(client2));
+        requestCrudAdapter.saveRequest(request3);
+        request3.setId(3L);
+        assertEquals(requestList, requestCrudAdapter.getRequestsByClientId(client1.getId()));
     }
 
     @Test
