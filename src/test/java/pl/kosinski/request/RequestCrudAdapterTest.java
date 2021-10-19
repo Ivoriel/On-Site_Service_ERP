@@ -8,8 +8,6 @@ import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.kosinski.client.Client;
-import pl.kosinski.client.ClientCrudAdapter;
-import pl.kosinski.client.ClientInfoDto;
 import pl.kosinski.client.ClientRepository;
 import pl.kosinski.common.RequestStatus;
 import pl.kosinski.common.RequestType;
@@ -18,7 +16,6 @@ import pl.kosinski.unit.UnitRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -38,7 +35,8 @@ class RequestCrudAdapterTest {
     @Test
     void givenRequestNotPresentInDb_whenRequestAddedToDB_thenRequestShouldBeRetrievable() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
-        var request = generateRequestWithoutTasksAndWorkTime();
+        var client = generateUniqueClient();
+        var request = generateRequestWithoutTasksAndWorkTime(client, generateUniqueUnit(client));
         requestCrudAdapter.saveRequest(request);
         request.setId(1L);
         assertEquals(request, requestCrudAdapter.findRequestbyId(1));
@@ -47,7 +45,8 @@ class RequestCrudAdapterTest {
     @Test
     void givenRequestPresentInDb_whenRequestDeletedFromDb_thenRequestShouldNotBeRetrievable() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
-        var request = generateRequestWithoutTasksAndWorkTime();
+        var client = generateUniqueClient();
+        var request = generateRequestWithoutTasksAndWorkTime(client, generateUniqueUnit(client));
         requestCrudAdapter.saveRequest(request);
         request.setId(1L);
         assertEquals(request, requestCrudAdapter.findRequestbyId(1));
@@ -59,11 +58,13 @@ class RequestCrudAdapterTest {
     void givenRequestsPresentInDb_whenFinDAllRequestsMethodCalled_thenAllRequestsShouldBeRetrievable() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
         List<RequestInfoDto> requestList = new ArrayList<>();
-        var request1 = generateRequestWithoutTasksAndWorkTime();
+        var client1 = generateUniqueClient();
+        var request1 = generateRequestWithoutTasksAndWorkTime(client1, generateUniqueUnit(client1));
         requestCrudAdapter.saveRequest(request1);
         request1.setId(1L);
         requestList.add(request1);
-        var request2 = generateRequestWithoutTasksAndWorkTime();
+        var client2 = generateUniqueClient();
+        var request2 = generateRequestWithoutTasksAndWorkTime(client2, generateUniqueUnit(client2));
         requestCrudAdapter.saveRequest(request2);
         request2.setId(2L);
         requestList.add(request2);
@@ -74,7 +75,8 @@ class RequestCrudAdapterTest {
     void givenRequestsPresentInDb_whenRequestsCalled_thenRequestsShouldBeRetrievableByClientId() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
         List<RequestInfoDto> requestList = new ArrayList<>();
-        var request1 = generateRequestWithoutTasksAndWorkTime();
+        var client = generateUniqueClient();
+        var request1 = generateRequestWithoutTasksAndWorkTime(client, generateUniqueUnit(client));
         requestCrudAdapter.saveRequest(request1);
         request1.setId(1L);
         requestList.add(request1);
@@ -85,23 +87,19 @@ class RequestCrudAdapterTest {
     void getRequestsByUnitId() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
         List<RequestInfoDto> requestList = new ArrayList<>();
-        var request1 = generateRequestWithoutTasksAndWorkTime();
+        var client = generateUniqueClient();
+        var unit = generateUniqueUnit(client);
+        var request1 = generateRequestWithoutTasksAndWorkTime(client, unit);
         requestCrudAdapter.saveRequest(request1);
         request1.setId(1L);
         requestList.add(request1);
         assertEquals(requestList, requestCrudAdapter.getRequestsByUnitId(request1.getUnits().get(0).getId()));
     }
 
-    private RequestInfoDto generateRequestWithoutTasksAndWorkTime() {
+    private RequestInfoDto generateRequestWithoutTasksAndWorkTime(Client client, Unit unit) {
         var request = new RequestInfoDto();
-        var client = new Client();
-        client.setName("clientName");
-        clientRepository.save(client);
-        var unit1 = new Unit();
-        unit1.setUnitInfo("12345", client);
-        unitRepository.save(unit1);
         List<Unit> units = new ArrayList<>();
-        units.add(unit1);
+        units.add(unit);
         request.setClient(client);
         request.setType(RequestType.MAINTENANCE);
         request.setStatus(RequestStatus.OPEN);
@@ -109,6 +107,20 @@ class RequestCrudAdapterTest {
         request.setDebrief("testDebrief");
         request.setUnits(units);
         return request;
+    }
+
+    private Client generateUniqueClient() {
+        var client = new Client();
+        client.setName("clientName");
+        clientRepository.save(client);
+        return client;
+    }
+
+    private Unit generateUniqueUnit(Client client) {
+        var unit = new Unit();
+        unit.setUnitInfo("12345", client);
+        unitRepository.save(unit);
+        return unit;
     }
 
 }
