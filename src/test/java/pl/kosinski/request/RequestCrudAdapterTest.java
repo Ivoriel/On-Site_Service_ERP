@@ -92,16 +92,23 @@ class RequestCrudAdapterTest {
     }
 
     @Test
-    void getRequestsByUnitId() {
+    void givenRequestsPresentInDb_whenRequestsCalled_thenRequestsShouldBeRetrievableByUnitId() {
         var requestCrudAdapter = new RequestCrudAdapter(requestRepository);
         List<RequestInfoDto> requestList = new ArrayList<>();
         var client = generateUniqueClient();
-        var unit = generateUniqueUnit(client);
-        var request1 = generateRequestWithoutTasksAndWorkTime(client, unit);
+        var unit1 = generateUniqueUnit(client);
+        var request1 = generateRequestWithoutTasksAndWorkTime(client, unit1);
         requestCrudAdapter.saveRequest(request1);
         request1.setId(1L);
         requestList.add(request1);
-        assertEquals(requestList, requestCrudAdapter.getRequestsByUnitId(request1.getUnits().get(0).getId()));
+        var request2 = generateRequestWithoutTasksAndWorkTime(client, unit1);
+        requestCrudAdapter.saveRequest(request2);
+        request2.setId(2L);
+        requestList.add(request2);
+        var unit2 = generateUniqueUnit(client);
+        var request3 = generateRequestWithoutTasksAndWorkTime(client, unit2);
+        requestCrudAdapter.saveRequest(request3);
+        assertEquals(requestList, requestCrudAdapter.getRequestsByUnitId(unit1.getId()));
     }
 
     private RequestInfoDto generateRequestWithoutTasksAndWorkTime(Client client, Unit unit) {
